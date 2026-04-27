@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Kiosk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2.513">
+</head>
+<body>
+
+    <div id="screen-error" class="screen hidden">
+        <div class="alert-box">
+            <h1 id="error-title">⚠️ Viga</h1>
+            <p id="error-message">Süsteem ootab sekkumist.</p>
+        </div>
+    </div>
+
+    <div id="screen-face" class="screen hidden">
+        <div id="robot-face" class="face-container">
+            <div id="floating-hei" class="floating-hei">Hei!</div>
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="eye"><div class="pupil"></div></div>
+        </div>
+    
+        <h1 id="greeting-text" class="greeting-text">
+            Astu ligi ja pane end proovile!<br>
+            <small>Vajuta nuppu, kui julged...</small>
+        </h1>
+    </div>
+
+    <div id="screen-quiz" class="screen hidden">
+        <div id="question-text">Ootan küsimust...</div>
+        
+        <div class="answers-grid">
+            <div class="answer-box red" id="ans-A">
+                <div class="btn-indicator">A</div>
+                <div class="answer-text" id="text-A">...</div>
+            </div>
+            <div class="answer-box green" id="ans-B">
+                <div class="btn-indicator">B</div>
+                <div class="answer-text" id="text-B">...</div>
+            </div>
+            <div class="answer-box blue" id="ans-C">
+                <div class="btn-indicator">C</div>
+                <div class="answer-text" id="text-C">...</div>
+            </div>
+            <div class="answer-box yellow" id="ans-D">
+                <div class="btn-indicator">D</div>
+                <div class="answer-text" id="text-D">...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-reward" class="screen hidden">
+        <h1 class="success-text">🎉 ÕIGE VASTUS! 🎉</h1>
+        <h2>Suurepärane! Siin on sulle auhind.</h2>
+    </div>
+    <div id="debug-hud" style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: lime; padding: 10px; font-family: monospace; border-radius: 5px; z-index: 9999;">
+        Radar: <span id="radar-val">0</span> cm
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

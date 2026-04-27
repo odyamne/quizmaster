@@ -1,0 +1,334 @@
+* {
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0;
+    user-select: none; 
+}
+
+body {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    overflow: hidden; /* Ei luba lehel kerida */
+}
+
+/* EKRAANIDE HALDUS */
+.screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 40px;
+    transition: opacity 0.3s ease;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+/* 1. VIGA / HOOLDUS */
+#screen-error {
+    background-color: #4a0e0e; /* Tume punane taust */
+}
+.alert-box {
+    background-color: #e74c3c;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.alert-box h1 { font-size: 4rem; margin-bottom: 20px; }
+.alert-box p { font-size: 2rem; font-weight: bold; }
+
+/* 2. SILMAD / NÄGU (IDLE & ACTIVE) */
+/* --- NÄGU JA SILMAD --- */
+.face-container {
+    display: flex;
+    gap: 80px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Sujuv näo liikumine */
+}
+
+/* ACTIVE režiimis hüppab Terve Nägu elevusest üles, mitte üksikud silmad */
+.face-container.excited {
+    transform: translateY(-15px);
+}
+
+.eye {
+    width: 180px;
+    height: 180px;
+    background-color: white;
+    /* PARANDUS 1: Pikslid tagavad sujuva kuju ülemineku! */
+    border-radius: 90px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: blink 4s infinite;
+    /* PARANDUS 2: kindlustame, et kõik omadused (kõrgus, kuju, värv) animeeruvad sujuvalt */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    overflow: hidden;
+}
+
+.pupil {
+    width: 70px;
+    height: 70px;
+    background-color: #1a1a2e;
+    border-radius: 50%;
+    position: relative; /* Vajalik sära lisamiseks */
+    animation: lookAround 8s infinite;
+    transition: all 0.4s ease;
+}
+
+/* Animeeritud sära silmadesse (Pupilli sisse) */
+.pupil::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: -15px 15px 0 -5px white; /* Teine väiksem täpp */
+}
+
+/* ACTIVE OLEK - Õnnelik kuju */
+.excited .eye {
+    /* PARANDUS 3: Vähendame kõrgust! See tõmbab alumise lau kõrgele üles. */
+    height: 130px; 
+    border-radius: 90px 90px 30px 30px !important; 
+    animation: blink 3s infinite;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); 
+}
+
+.excited .pupil {
+    width: 80px;
+    height: 80px;
+    animation: none;
+    /* Hoiame pupilli uues, madalamas silmas kenasti keskel */
+    transform: translateY(-5px); 
+}
+/* 3. MÄNGU (QUIZ) STIILID */
+
+#screen-quiz {
+    font-family: 'Fredoka', 'Segoe UI', sans-serif; /* Rakendame uue ümara fondi tervele viktoriinile */
+}
+#question-text {
+    font-size: 3.5rem;
+    margin-bottom: 50px;
+    min-height: 180px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 90%;
+    
+    /* UUS: Glassmorphism (poolläbipaistev klaasi efekt) küsimuse taustal */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); /* Teeb taguse häguseks */
+    padding: 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Õrn heledam äär */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding-bottom: 15px; 
+    width: 80%;
+    max-width: 1000px;
+}
+
+.answer-box {
+    background-color: #34495e;
+    border-radius: 25px; /* Veidi ümaramad nurgad */
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 10px 0 #2c3e50; /* Sügavam ja "paksem" 3D nupu efekt */
+    transition: all 0.15s ease;
+    
+    /* Sunnime KÕIGILE (ka kollasele) valge teksti koos tumeda varjuga loetavuse jaoks */
+    color: #ffffff; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4); 
+}
+
+.answer-box.pressed {
+    transform: translateY(10px); /* Nupp vajub ekraanil sügavamale */
+    box-shadow: 0 0 0 transparent !important;
+}
+
+.answer-box.dimmed {
+    opacity: 0.3;
+    filter: grayscale(80%);
+}
+
+/* Nuppude värvid ja nende varjud */
+.red { background-color: #e74c3c; box-shadow: 0 10px 0 #c0392b; }
+.green { background-color: #2ecc71; box-shadow: 0 10px 0 #27ae60; }
+.blue { background-color: #3498db; box-shadow: 0 10px 0 #2980b9; }
+.yellow { background-color: #f39c12; box-shadow: 0 10px 0 #d68910; }
+
+.btn-indicator {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-right: 25px;
+    background: rgba(255,255,255,0.25);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: inset 0 3px 6px rgba(255,255,255,0.3); /* Väike sisemine sära, nagu päris plastiknupul */
+}
+.answer-text { 
+    font-size: 2.2rem; 
+    font-weight: 600; 
+}
+
+/* 4. VÕIDU STIILID */
+.success-text { font-size: 5rem; color: #2ecc71; margin-bottom: 20px; }
+
+/* ANIMATSIOONID */
+@keyframes blink {
+    0%, 96%, 98% { transform: scaleY(1); }
+    97% { transform: scaleY(0.2); }
+}
+@keyframes lookAround {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-20px, 10px); }
+    50% { transform: translate(20px, -10px); }
+    75% { transform: translate(0, 20px); }
+}
+/* Uus pulseeriv animatsioon ekraani nuppudele */
+@keyframes buttonPulse {
+    from { transform: scale(1); filter: brightness(1); }
+    to { transform: scale(1.05); filter: brightness(1.3); }
+}
+
+.answer-box.active-blink {
+    animation: buttonPulse 0.8s infinite alternate ease-in-out;
+    border: 3px solid white; /* Lisame valge ääre, et nad veel rohkem silma paistaks */
+}
+
+/* Ekraani väristamine vale vastuse korral */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Valikuline: muudame küsimuse teksti punaseks, kui see on span-i sees (valesti vastates) */
+#question-text span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Vale vastuse nupu stiil */
+.answer-box.wrong-answer {
+    background-color: #c0392b !important; 
+    box-shadow: 0 0 0 transparent !important; 
+    transform: translateY(10px) !important; 
+    color: white !important;
+    animation: shake 0.5s;
+}
+
+/* --- KUTSUV TEKST (GREETING) --- */
+.greeting-text {
+    position: absolute; 
+    bottom: 8%; /* Tõstsime natuke allapoole */
+    width: 100%;
+    font-family: 'Fredoka', 'Segoe UI', sans-serif; /* Uus armas ja ümar font */
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-align: center;
+    left: 0;
+    opacity: 0; 
+    /* Ilmub natuke väiksemana ja altpoolt (hüppab ette) */
+    transform: translateY(30px) scale(0.9); 
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* See lisatakse JS-iga ACTIVE olekus */
+.excited-text {
+    opacity: 1;
+    /* Pärast ilmumist käivitab lõpmatu hõljumise animatsiooni */
+    animation: gentleFloat 3s ease-in-out infinite alternate; 
+}
+
+/* Kuldsed "Hei!" tähed */
+.greeting-text .highlight {
+    background: linear-gradient(45deg, #f1c40f, #f39c12);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Teeb teksti sisu läbipaistvaks, et gradient paistaks */
+    font-weight: 700;
+    font-size: 5rem;
+    /* Gradient-tekstile ei mõju tavaline text-shadow, kasutame drop-shadow filtrit */
+    filter: drop-shadow(0px 4px 2px rgba(0,0,0,0.4)); 
+}
+
+/* Alumine, väiksem tekst */
+.greeting-text small {
+    display: block; /* Viib uuele reale */
+    font-size: 2.2rem;
+    color: #bdc3c7; /* Kergelt hallikas-sinine, et ei karjuks näkku */
+    margin-top: 15px;
+    font-weight: 400;
+}
+
+/* UUS ANIMATSIOON: Teksti sujuv õõtsumine */
+@keyframes gentleFloat {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-8px) scale(1.02); } /* Tõuseb natuke ja läheb 2% suuremaks */
+}
+
+/* --- UUS: Hõljuv "Hei!" silmade kõrval --- */
+.floating-hei {
+    position: absolute;
+    top: -60px;   /* Liigutab teksti silmadest ülespoole */
+    left: -100px;  /* Nihutab teksti vasakule, vasaku silma kohale */
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 5.5rem;
+    background: linear-gradient(45deg, #dafcf6, #6bcaba);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 4px 2px rgba(0,0,0,0.4));
+    
+    /* Alguses on tekst peidus, viltu (-45 kraadi) ja väike */
+    opacity: 0;
+    transform: rotate(-45deg) scale(0);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* See klass aktiveerub JS-iga ACTIVE olekus */
+.floating-hei.active {
+    opacity: 1;
+    transform: rotate(-45deg) scale(1);
+    animation: gentleFloat 3s ease-in-out infinite alternate;
+}

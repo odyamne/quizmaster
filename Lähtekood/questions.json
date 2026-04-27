@@ -1,0 +1,187 @@
+[
+  {
+    "question": "Tehisintellekt koolis on pigem…",
+    "answers": {"A": "Abiline", "B": "Oht", "C": "Tulevik, millega harjume", "D": "Mööduv trend"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "5 + 5 × 0 = ?",
+    "answers": {"A": "0", "B": "5", "C": "10", "D": "50"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui 3 × 3 + 3 ÷ 3 = ?",
+    "answers": {"A": "4", "B": "6", "C": "10", "D": "12"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "Kui 5 masinat teevad 5 minutiga 5 toodet, kui kaua aega kulub 100 masinal 100 toote tegemiseks?",
+    "answers": {"A": "5 minutit", "B": "100 minutit", "C": "1 minut", "D": "50 minutit"},
+    "correct_btn": "A"
+  },
+  {
+    "question": "Mis on digitehnoloogia?",
+    "answers": {"A": "Ainult arvutimängud", "B": "Tehnoloogia, mis töötab andmetega", "C": "Tehnoloogia, mis ei lähe kunagi katki", "D": "Ainult nutitelefonid"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Milline neist on algoritm?",
+    "answers": {"A": "Juhuslik mõte", "B": "Samm-sammuline juhis", "C": "Väga kallis arvuti", "D": "Internetibrauser"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mida teeb server kõige sagedamini?",
+    "answers": {"A": "Puhkab", "B": "Jagab andmeid", "C": "Joob kohvi", "D": "Mängib mänge"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis on tehisintellekti peamine 'tooraine'?",
+    "answers": {"A": "Elekter", "B": "Andmed", "C": "Šokolaad", "D": "Plastik"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Miks kasutatakse teaduses simulatsioone?",
+    "answers": {"A": "Et säästa aega ja ressursse", "B": "Et kõik näeks lahe välja", "C": "Et vältida matemaatikat", "D": "Et arvuteid testida"},
+    "correct_btn": "A"
+  },
+  {
+    "question": "Milline väide on õige?",
+    "answers": {"A": "Andmed = teadmine", "B": "Andmed + analüüs = teadmine", "C": "Andmed + WiFi = tarkus", "D": "Andmed = tarkvara"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis eristab masinõpet tavalistest algoritmidest?",
+    "answers": {"A": "Masin õpib mustreid andmetest", "B": "Masin töötab ainult öösel", "C": "Masin on alati täpne", "D": "Masin ei vaja elektrit"},
+    "correct_btn": "A"
+  },
+  {
+    "question": "Mis on digitehnoloogiate eetika üks keskne küsimus?",
+    "answers": {"A": "Kui kiire on arvuti", "B": "Kellele kuuluvad andmed", "C": "Mis värvi on ekraan", "D": "Kas robotid oskavad tantsida"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui algoritm on kallutatud, siis…",
+    "answers": {"A": "See töötab kiiremini", "B": "See võib teha ebaõiglasi otsuseid", "C": "See vajab rohkem šokolaadi", "D": "See lülitub ise välja"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis juhtub, kui andmeid ei kontrollita?",
+    "answers": {"A": "Midagi", "B": "Tulemused võivad olla valed", "C": "Robot saab targemaks", "D": "Arvuti plahvatab"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kas tehisintellekt võib eksida?",
+    "answers": {"A": "Ei, mitte kunagi", "B": "Jah, nagu inimesedki", "C": "Ainult esmaspäeviti", "D": "Jah, aga ainult matemaatikas"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui mäng õpetab, siis see on…",
+    "answers": {"A": "Ajaviide", "B": "Õpimäng", "C": "Kodutöö", "D": "Vigane mäng"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis on punktisüsteemi eesmärk mängus?",
+    "answers": {"A": "Segadus", "B": "Motiveerimine", "C": "Karistamine", "D": "Aja raiskamine"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Milline neist on matemaatiline mõiste?",
+    "answers": {"A": "Level", "B": "Võrrand", "C": "Avatar", "D": "Mängupult"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Miks kasutatakse matemaatikat mängudes?",
+    "answers": {"A": "Graafika jaoks", "B": "Reeglite ja tasakaalu jaoks", "C": "Ainult hinnete jaoks", "D": "Muusika esitamiseks"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis aitab mängijal õppida läbi eksimise?",
+    "answers": {"A": "Karistus", "B": "Tagasiside", "C": "Vaikus", "D": "Mängu sulgemine"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui mängu raskus kasvab sammhaaval, siis see on…",
+    "answers": {"A": "Juhuslik", "B": "Progressioon", "C": "Kaos", "D": "Regressioon"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Millist matemaatikat kasutatakse sageli mängude tasakaalustamisel?",
+    "answers": {"A": "Tõenäosus", "B": "Geograafia", "C": "Keeleteadus", "D": "Ajalugu"},
+    "correct_btn": "A"
+  },
+  {
+    "question": "Mis seob matemaatikat ja õpimänge kõige rohkem?",
+    "answers": {"A": "Valemid", "B": "Probleemilahendus", "C": "Arvutiklass", "D": "Kalkulaatorid"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui mäng kohandub mängija tasemega, on see…",
+    "answers": {"A": "Staatiline", "B": "Adaptiivne", "C": "Igav", "D": "Katkine"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kas matemaatika võib olla mänguline?",
+    "answers": {"A": "Ei, mitte kunagi", "B": "Jah, kui disain on hea", "C": "Ainult nädalavahetusel", "D": "Jah, aga ainult lastele"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis on hullem kui vale vastus?",
+    "answers": {"A": "Raske küsimus", "B": "Null tagasisidet", "C": "Liiga lihtne mäng", "D": "Pikk ooteaeg"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis tuleb järgmisena?  2, 4, 6, ?",
+    "answers": {"A": "7", "B": "8", "C": "10", "D": "12"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui sul on 3 õuna ja võtad ära 2, mitu sul on?",
+    "answers": {"A": "1", "B": "2", "C": "3", "D": "0"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Milline neist EI sobi hulka?",
+    "answers": {"A": "Ring", "B": "Ruut", "C": "Kolmapäev", "D": "Kolmnurk"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "Mis tuleb järgmisena?  1, 1, 2, 3, 5, ?",
+    "answers": {"A": "6", "B": "7", "C": "8", "D": "9"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "Kõik robotid on targad. Mõned targad on naljakad. Kas kõik robotid on naljakad?",
+    "answers": {"A": "Jah", "B": "Ei", "C": "Ei saa öelda", "D": "Ainult sinised robotid"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "Kui kõik sinised on ruudud ja kõik ruudud on suured, siis sinised on…",
+    "answers": {"A": "Väikesed", "B": "Suured", "C": "Ringid", "D": "Punased"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Mis tuleb järgmisena?  3, 6, 12, 24, ?",
+    "answers": {"A": "36", "B": "48", "C": "60", "D": "72"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kui vale vastus annab 0 punkti ja õige 1 punkti, siis mis on parim strateegia?",
+    "answers": {"A": "Juhuslikult valida", "B": "Mõelda enne vastamist", "C": "Mitte vastata", "D": "Küsida sõbralt"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kumb väide on loogiliselt õige?",
+    "answers": {"A": "Kõik A on B → kõik B on A", "B": "Mõned A on B → kõik A on B", "C": "Kõik A on B ≠ kõik B on A", "D": "Ükski A ei ole B"},
+    "correct_btn": "C"
+  },
+  {
+    "question": "Kui sa vastad sellele küsimusele valesti, mis juhtub?",
+    "answers": {"A": "Sa vastasid õigesti", "B": "Sa vastasid valesti", "C": "Šokolaad kaob", "D": "Mäng jookseb kokku"},
+    "correct_btn": "B"
+  },
+  {
+    "question": "Kas see küsimus on mõistatus?",
+    "answers": {"A": "Jah", "B": "Ei", "C": "Võib-olla", "D": "See on fakt"},
+    "correct_btn": "A"
+  }
+]

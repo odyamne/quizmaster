@@ -10,12 +10,12 @@ from gpiozero import Button, LED, DigitalInputDevice
 import uvicorn
 
 # ==========================================
-# 0. GLOBAALSED MUUTUJAD JA OLEKUD (FSM)
+# GLOBAALSED MUUTUJAD JA OLEKUD
 # ==========================================
 main_loop = None
 STATE = "IDLE"  # Võimalikud: ERROR, IDLE, ACTIVE, QUIZ, REWARD
 
-# Riistvara pordid (Muuda vastavalt vajadusele)
+# Riistvara pordid
 RADAR_PORT = '/dev/ttyAMA4'
 ESP_PORT = '/dev/ttyUSB0'  # Või /dev/ttyACM0
 
@@ -27,7 +27,7 @@ questions_db = []
 current_question = None
 
 # ==========================================
-# 1. ANDMEBAASI LAADIMINE
+# ANDMEBAASI LAADIMINE
 # ==========================================
 def load_questions():
     try:
@@ -45,7 +45,7 @@ def get_random_question():
     return random.choice(questions_db)
 
 # ==========================================
-# 2. RIISTVARA: ESP32 JA RADAR (JADAÜHENDUSED)
+# ESP32 JA RADAR (JADAÜHENDUSED)
 # ==========================================
 esp_serial = None
 radar_serial = None
@@ -71,7 +71,7 @@ def send_esp_command(cmd: str):
             print(f"ESP saatmise viga: {e}")
 
 # ==========================================
-# 3. RIISTVARA: NUPUD JA HALL SENSOR
+# NUPUD JA HALL SENSOR
 # ==========================================
 hardware_events = asyncio.Queue()
 
@@ -100,7 +100,7 @@ def turn_all_leds(state: bool):
         led_A.off(); led_B.off(); led_C.off(); led_D.off()
 
 # ==========================================
-# 4. OLEKUMASINA (FSM) LOOGIKA
+# OLEKUMASINA/FSM LOOGIKAL ALGORITM
 # ==========================================
 def change_state(new_state):
     global STATE, current_question, quiz_last_activity
@@ -146,13 +146,13 @@ def change_state(new_state):
         send_esp_command("LED_OFF")
 
 # ==========================================
-# 5. SÜNDMUSTE KÄSITLEJAD (Nupud & Sensor)
+# SÜNDMUSTE KÄSITLEJAD (Nupud & Sensor)
 # ==========================================
 def on_button_pressed(btn_name):
     global quiz_last_activity
     
     if STATE == "ERROR":
-        # Kui oleme veas, ainult Roheline nupp (B) teeb midagi (Kinnitab täitmise)
+        # Kui oleme hoolduses, ainult ROHELINE nupp teeb midagi (kinnitab täitmise)
         if btn_name == "B" and not hall_sensor.is_active:
             print("Hooldus kinnitatud. Masin korras!")
             change_state("IDLE")
@@ -173,7 +173,7 @@ def on_button_pressed(btn_name):
         # Kontrollime vastust
         if btn_name == current_question["correct_btn"]:
             change_state("REWARD")
-            # Käivitame asünkroonse ootaja, mis viib tagasi IDLE'sse pärast servo tsüklit
+            # Käivitame asünkroonse ootaja, mis viib tagasi IDLE olekusse pärast servo tsüklit
             if main_loop:
                 main_loop.create_task(reward_sequence())
         else:
@@ -181,7 +181,7 @@ def on_button_pressed(btn_name):
             pass 
 
 def on_hall_sensor_changed():
-    """Kutsutakse välja, kui magnet kukub ette (otsas) või võetakse ära (hooldus)"""
+    """Kutsutakse välja, kui magnet fikseerib salve tühjenemise"""
     if hall_sensor.is_active:
         print("HÄIRE: Šokolaad on otsas!")
         change_state("ERROR")
@@ -203,12 +203,12 @@ if hardware_available:
     hall_sensor.when_deactivated = on_hall_sensor_changed
 
 # ==========================================
-# 6. TAUSTAPROTSESSID (Radar & Taimerid)
+# TAUSTAPROTSESSID (Radar & Taimerid)
 # ==========================================
 async def reward_sequence():
     """Ootab servo väljastustsükli lõppu ja taastab ooterežiimi"""
     await asyncio.sleep(8) # ESP tsükkel võtab ca 8 sek
-    if STATE == "REWARD": # Veendume, et vahepeal pole magnet kukkunud
+    if STATE == "REWARD": # Veendume, et vahepeal pole magnet salv tühjenenud
         change_state("IDLE")
 
 async def led_blinker_task():
@@ -216,7 +216,7 @@ async def led_blinker_task():
     if not hardware_available:
         return
         
-    # Paneme tuled massiivi, et saaksime neist kordamööda üle käia
+    # Nuppude LED-ide haldus
     leds = [led_A, led_B, led_C, led_D]
     wave_index = 0
     wave_direction = 1
@@ -247,8 +247,8 @@ async def led_blinker_task():
             await asyncio.sleep(0.5) # Vilkumise kiirus (0.5s sees, 0.5s väljas)
             
         else:
-            # Muudes olekutes (QUIZ, REWARD, ERROR) me animatsiooni ei tee.
-            # Tulede staatilise oleku määrab `change_state()` funktsioon.
+            # Muudes olekutes (QUIZ, REWARD, ERROR) me animatsiooni ei tee
+            # Tulede staatilise oleku määrab `change_state()` funktsioon
             await asyncio.sleep(0.5)
 
 async def radar_listener():
@@ -263,7 +263,7 @@ async def radar_listener():
                 # Puhastame sisendi ja teisendame numbriks
                 distance = int(''.join(filter(str.isdigit, line))) 
                 
-                # Silumiseks saadame endiselt andmed HUD-i (kui sa selle lisasid)
+                # Silumiseks saadame endiselt andmed HUDi (lõpus eemaldame)
                 if main_loop:
                     main_loop.call_soon_threadsafe(hardware_events.put_nowait, {
                         "event": "RADAR_DEBUG", 
@@ -309,7 +309,7 @@ async def quiz_timeout_watcher():
         await asyncio.sleep(1)
 
 # ==========================================
-# 7. FASTAPI JA SÜSTEEMI KÄIVITUMINE
+# FASTAPI JA SÜSTEEMI KÄIVITUMINE
 # ==========================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
